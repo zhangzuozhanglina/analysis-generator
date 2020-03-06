@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.code.generator.mapper.MysqlDatabaseInfoMapper">
+    <select id="getTables" resultType="java.util.HashMap">
+            SELECT
+            a.table_name as TABLENAME,
+            a.table_comment as TABLECOMMENT,
+            b.COLUMN_NAME as COLNAME,
+            b.column_comment as COLCOMMENT,
+            b.column_type as COLTYPE,
+            b.column_key as PRIMARYKEY
+            FROM
+            information_schema. TABLES a
+            LEFT JOIN information_schema. COLUMNS b ON a.table_name = b.TABLE_NAME
+            WHERE
+            a.table_schema = 'my_mail'
+            ORDER BY
+            a.table_name
+    </select>
+</mapper>
